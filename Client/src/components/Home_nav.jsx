@@ -26,18 +26,3 @@ const Home_nav = () => {
 }
 
 export default Home_nav
-
-
-{/* <div className='flex-row bg-black w-screen h-16'>
-    <div className="absolute top-3 left-4">
-        <img
-            src="/icons/my-icon.jpeg"
-            alt="Website Icon"
-            className="w-10 h-10 border-2 border-red-600 drop-shadow-md rounded-full object-cover gap-11" />
-    </div>
-    <h1 className='text-red-600 absolute top-4 left-16 text-lg gap-9'>VowHelp</h1>
-    <div className=' pt-2 flex-grow flex justify-center gap-8'>
-    <input type="text" placeholder="Search" className="align-items p-3 w-[22vw] border-2 border-red-300 rounded-lg focus:outline-none" />
-    <button className='bg-red-600 text-white px-5 rounded-xl'>Add Request </button>
-    </div>
-</div> */}
