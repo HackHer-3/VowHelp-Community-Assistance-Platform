@@ -6,8 +6,11 @@ import Emergency_req from '../components/Emergency_req'
 const Home = () => {
   return (
    <>
-<Home_nav/>
-<Emergency_req/>
+   <div className='bg-slate-100 w-screen h-screen'>
+   <Home_nav/>
+   <Emergency_req/>
+   </div>
+
    </>
   )
 }
