@@ -1,15 +1,15 @@
 import React from 'react'
-import icon from '../assets/img/my-icon.jpeg';
+import icon from '../assets/img/logo.png';
 import profileimg from '../assets/img/download.jfif';
-import { Search } from "lucide-react"
+
 const Home_nav = () => {
     return (
         <>
             <div className='flex flex-row w-ful h-16 bg-white shadow-md'>
-                <div className='p-3'>
-                    <img src={icon} alt="icon" className='w-10 h-10 rounded-full border-2 border-red-600' />
-                </div>
-                <h1 className='text-red-600 text-xl py-4 font-bold'>VowHelp</h1>
+                
+                    <img src={icon} alt="icon" className='h-[70px]  border-red-600' />
+              
+                <h1 className='text-red-600 text-xl mt-5 font-bold'>VowHelp</h1>
                 <div className='flex flex-grow justify-center pt-2'>
                     {/* <input type="Search" placeholder='Search by issue' className='p-5 flex items-center  border-b-2 border-red-400 rounded-sm bg-slate-100 h-12 w-200 focus:outline-none' />
                     <button type="submit" className='border-none'><Search/></button> */}
@@ -34,7 +34,7 @@ const Home_nav = () => {
                             </svg>
                         </button>
                         <input
-                            class="input rounded-full px-8 py-2 border-2 border-transparent border-red-500 focus:outline-none focus:border-red-600 placeholder-gray-400 transition-all duration-300 shadow-md"
+                            class="input rounded-full px-8 py-2 border-2 w-[20vw] border-red-500 focus:outline-none placeholder-gray-400 transition-all duration-300 shadow-md"
                             placeholder="Search..."
                             required=""
                             type="text"
