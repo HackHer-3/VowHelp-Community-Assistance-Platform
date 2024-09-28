@@ -1,46 +1,41 @@
 import Dp from '../assets/img/logo.png'
 import Post1 from '../assets/img/post 1.jpg'
-import resolved from "../assets/img/resolved.png"
-import unresolved from "../assets/img/Unresolved.png"
+import { HeartHandshake } from "lucide-react"
+import comment from '../assets/img/chat-heart-line.png'
+import handrise from '../assets/img/hand.png'
+import share from '../assets/img/share-forward-line.png'
+import resolved from '../assets/img/thumb-up-line.png'
+
 const Posts = () => {
     return (
         <>
             <div className="flex flex-col h-[85vh] items-center p-5 justify-start">
 
-                <div className="bg-white w-[40vw] h-[100vh] rounded-xl">
+                <div className="bg-white w-[40vw] h-[150vh] rounded-xl shadow-lg">
 
-                    <div className="flex justify-start w-full p-3">
-                        <img src={Dp} alt="dp" className='h-10 border-2 border-red-600 rounded-full' />
-                        <h3 className='font-bold p-2'>Hafu sudin</h3>
+                    <div className="flex justify-start w-full p-3 py-2">
+                        <img src={Dp} alt="dp" className=' h-10 border-2 border-red-600 rounded-full' />
+                        <h3 className='font-bold text-xl p-1 px-2'>Hafu sudin</h3>
 
                     </div>
-                    <div className="flex w-full p-3">
+                    <div className="pl-5 flex justify-center w-full p-2 pt-0">
                         Heyy Guyss!!I'm glad to inform that i visited a Orphanage and provided them food and clothings
                     </div>
-                    <div className='p-5'>
+                    <div className='p-5 py-2'>
                         <img src={Post1} alt="Post 1 in UI" className=' border-black border-2 rounded-lg' />
                     </div>
-                    <div className="pl-7 flex flex-row w-[10vw] justify-center gap-8">
-
-                        {/* <div className="w-[20vw] flex  flex-row gap-3 bg-slate-400"> */}
-                        <button className=' bg-red-500 hover:bg-transparent rounded-lg hover:text-black text-white font-bold border-2 border-red-500 p-3 '>Respond</button>
-                       
-                        <img src={resolved} alt="resolved" className='w-32 h-14 ' />
-                        <img src={unresolved} alt="unresolved" className='w-32 h-14'/>
-                        {/* </div> */}
-                        <div className=' flex flex-row h-10'><img src={resolved} alt="Resolved icon" /><br /><img src={unresolved} alt="Unresolved icon" />
+                    <div className="pl-6 flex flex-row  w-[25vw] gap-4">
+                        <button className=' bg-red-500 hover:bg-transparent rounded-lg hover:text-black text-white font-bold border-2 border-red-500 p-3 py-2 '>Respond</button>
+                        <div className="flex justify-center mt-3">
+                            <HeartHandshake className=" size-xl text-red-500 w-6 h-6 " />
+                        </div>
+                        <img src={comment} alt="Comment Icon" className='mt-2 h-8'/>
+                            <img src={share} alt="Share Icon" className='mt-2 h-8'/>
+                            
                     </div>
-                    </div>
-                    
-
-
 
                 </div>
-
-
             </div>
-
-
         </>
     )
 }
