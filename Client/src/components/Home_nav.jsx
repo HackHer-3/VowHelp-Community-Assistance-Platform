@@ -1,6 +1,6 @@
 import React from 'react'
 import icon from '../assets/img/logo.png';
-import profileimg from '../assets/img/download.jfif';
+import profileimg from '../assets/img/download.jpg';
 
 const Home_nav = () => {
     return (
