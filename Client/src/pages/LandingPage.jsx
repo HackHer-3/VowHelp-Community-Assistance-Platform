@@ -9,8 +9,8 @@ const Landing = () => {
           <img src={Logo} alt="" />
          <h2>VowHelp</h2></div>
         <div className='btn'>
-      <button>Signin</button>
-      <button>Signup</button>
+      <button className="button1">Signin</button>
+      <button className="button1">Signup</button>
       </div>
       </div>
     </div>

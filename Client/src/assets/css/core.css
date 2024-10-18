@@ -6,3 +6,12 @@
     margin: 0;
     padding: 0;
 }
+
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
+
+.scrollbar-hidden {
+    -ms-overflow-style: none;  /* Internet Explorer and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
