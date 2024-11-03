@@ -19,7 +19,7 @@ const FilterOptions = ({ onFilterChange }) => {
   };
 
   return (
-    <div className="w-80 p-4 border-r border-gray-300 h-screen overflow-y-auto scrollbar-hidden"> {/* Hide scrollbar */}
+    <div className="w-80 p-4 border-r  border-gray-300 h-screen overflow-y-auto scrollbar-hidden"> {/* Hide scrollbar */}
       <h3 className="text-lg font-semibold mb-4">Filters</h3>
       <div className="mb-4">
         <label className="block text-sm font-medium mb-1">Location:</label>
@@ -28,7 +28,7 @@ const FilterOptions = ({ onFilterChange }) => {
           value={location}
           onChange={(e) => { setLocation(e.target.value); handleFilterChange(); }}
           placeholder="Enter location"
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded  border-red-300 focus:outline-none"
         />
       </div>
       <div className="mb-4">
@@ -37,7 +37,7 @@ const FilterOptions = ({ onFilterChange }) => {
           type="date"
           value={date}
           onChange={(e) => { setDate(e.target.value); handleFilterChange(); }}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded border-red-300 focus:outline-none"
         />
       </div>
       <div className="mb-4">
@@ -45,7 +45,7 @@ const FilterOptions = ({ onFilterChange }) => {
         <select
           value={issueType}
           onChange={(e) => { setIssueType(e.target.value); handleFilterChange(); }}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded border-red-300 focus:outline-none"
         >
           <option value="">Select issue</option>
           <option value="Health">Health</option>
@@ -60,7 +60,7 @@ const FilterOptions = ({ onFilterChange }) => {
         <select
           value={urgency}
           onChange={(e) => { setUrgency(e.target.value); handleFilterChange(); }}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded border-red-300 focus:outline-none"
         >
           <option value="">Select urgency</option>
           <option value="Low">Low</option>
@@ -74,7 +74,7 @@ const FilterOptions = ({ onFilterChange }) => {
         <select
           value={ageGroup}
           onChange={(e) => { setAgeGroup(e.target.value); handleFilterChange(); }}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded border-red-300 focus:outline-none"
         >
           <option value="">Select age group</option>
           <option value="Children">Children</option>
@@ -87,7 +87,7 @@ const FilterOptions = ({ onFilterChange }) => {
         <select
           value={requestStatus}
           onChange={(e) => { setRequestStatus(e.target.value); handleFilterChange(); }}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded border-red-300 focus:outline-none"
         >
           <option value="">Select status</option>
           <option value="Open">Open</option>
@@ -100,7 +100,7 @@ const FilterOptions = ({ onFilterChange }) => {
         <select
           value={gender}
           onChange={(e) => { setGender(e.target.value); handleFilterChange(); }}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded border-red-300 focus:outline-none"
         >
           <option value="">Select gender</option>
           <option value="Male">Male</option>
