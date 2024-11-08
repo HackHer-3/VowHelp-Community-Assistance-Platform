@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class HelpRequestService {
@@ -23,5 +24,12 @@ public class HelpRequestService {
 
     public HelpRequest createRequest(HelpRequest helpRequest) {
         return helpRequestRepository.save(helpRequest);
+    }
+
+    // Method to get only emergency requests
+    public List<HelpRequest> getEmergencyRequests() {
+        return helpRequestRepository.findAll().stream()
+                .filter(request -> "emergency".equalsIgnoreCase(request.getUrgencyLevel()))
+                .collect(Collectors.toList());
     }
 }

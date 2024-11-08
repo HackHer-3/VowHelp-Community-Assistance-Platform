@@ -21,13 +21,18 @@ public class HelpRequestController {
     }
 
     @GetMapping
-    public List<HelpRequest> getAllRequests() {
-        return helpRequestService.getAllRequests();
+    public ResponseEntity<List<HelpRequest>> getAllRequests() {
+        List<HelpRequest> requests = helpRequestService.getAllRequests();
+        return new ResponseEntity<>(requests, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<HelpRequest> createRequest(@RequestBody HelpRequest helpRequest) {
-        HelpRequest createdRequest = helpRequestService.createRequest(helpRequest);
-        return new ResponseEntity<>(createdRequest, HttpStatus.CREATED);
+    public ResponseEntity<?> createRequest(@RequestBody HelpRequest helpRequest) {
+        try {
+            HelpRequest createdRequest = helpRequestService.createRequest(helpRequest);
+            return new ResponseEntity<>(createdRequest, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error creating request: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 }
