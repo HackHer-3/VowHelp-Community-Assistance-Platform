@@ -14,13 +14,14 @@ const AddRequestForm = ({ onClose }) => {
   };
 
   return (
+    <div className='bg-slate-100 w-screen h-screen'>
     <div className="bg-white shadow-lg p-6 rounded-lg w-[40vw] mx-auto mt-8">
       <h2 className="text-xl font-bold mb-4">Add New Request</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700">Description</label>
           <textarea
-            className="w-full p-3 border border-gray-300 rounded"
+            className="w-full p-3 border border-red-300 rounded"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
@@ -30,7 +31,7 @@ const AddRequestForm = ({ onClose }) => {
           <label className="block text-gray-700">Location</label>
           <input
             type="text"
-            className="w-full p-3 border border-gray-300 rounded"
+            className="w-full p-3 border border-red-300 rounded"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             required
@@ -40,7 +41,7 @@ const AddRequestForm = ({ onClose }) => {
           <label className="block text-gray-700">Date</label>
           <input
             type="date"
-            className="w-full p-3 border border-gray-300 rounded"
+            className="w-full p-3 border border-red-300 rounded"
             value={date}
             onChange={(e) => setDate(e.target.value)}
             required
@@ -49,7 +50,7 @@ const AddRequestForm = ({ onClose }) => {
         <div className="mb-4">
           <label className="block text-gray-700">Urgency Level</label>
           <select
-            className="w-full p-3 border border-gray-300 rounded"
+            className="w-full p-3 border border-red-300 rounded"
             value={urgencyLevel}
             onChange={(e) => setUrgencyLevel(e.target.value)}
           >
@@ -62,11 +63,12 @@ const AddRequestForm = ({ onClose }) => {
           <button type="button" onClick={onClose} className="mr-2 bg-gray-200 p-2 rounded">
             Cancel
           </button>
-          <button type="submit" className="bg-blue-600 text-white p-2 rounded">
+          <button type="submit" className="bg-red-600 text-white p-2 rounded">
             Add Request
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 };
