@@ -1,10 +1,10 @@
-// SignInSignUp.jsx
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import backgroundImg from '../assets/img/Signin.jpg'; // Your background image
-import googleLogo from '../assets/img/Google.png'; // Add your Google logo image path
-import facebookLogo from '../assets/img/fb.png'; // Add your Facebook logo image path
-import instagramLogo from '../assets/img/ig.png'; // Add your Instagram logo image path
+import backgroundImg from '../assets/img/Signin.jpg'; 
+import googleLogo from '../assets/img/Google.png'; 
+import facebookLogo from '../assets/img/fb.png'; 
+import instagramLogo from '../assets/img/ig.png'; 
 
 const SignInSignUp = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -16,6 +16,7 @@ const SignInSignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    navigate('/Home');
   };
 
   const handleBack = () => {
@@ -23,13 +24,12 @@ const SignInSignUp = () => {
   };
 
   const handleSocialSignIn = (platform) => {
-    // Implement social sign-in logic here
+
     console.log(`Sign in with ${platform}`);
   };
 
   return (
     <div className="flex min-h-screen">
-      {/* Left Section for Background */}
       <div
         className="hidden md:flex md:w-1/2 bg-cover bg-center"
         style={{ backgroundImage: `url(${backgroundImg})` }}
@@ -39,7 +39,6 @@ const SignInSignUp = () => {
         </div>
       </div>
 
-      {/* Right Section for Forms */}
       <div className="flex flex-col justify-center items-center w-full md:w-1/2 bg-gray-100 p-10">
         <button
           onClick={handleBack}
@@ -93,7 +92,6 @@ const SignInSignUp = () => {
             </button>
           </form>
 
-          {/* Social Sign-In Logos */}
           <div className="mt-6 flex flex-col space-y-4">
             <h3 className="text-center text-lg text-gray-600">Or sign in with:</h3>
             <div className="flex justify-center space-x-4">

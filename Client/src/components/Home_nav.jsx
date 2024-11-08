@@ -1,9 +1,15 @@
 import React from 'react'
 import icon from '../assets/img/logo.png';
 import profileimg from '../assets/img/download.jpg';
-
+import { useNavigate } from 'react-router-dom';
 
 const Home_nav = () => {
+
+    const navigate=useNavigate();
+    const handlerequest=()=>{
+     navigate('/addrequest')
+    }
+ 
     return (
         <>
             <div className='flex flex-row w-ful h-16 bg-white shadow-md'>
@@ -60,7 +66,7 @@ const Home_nav = () => {
 
                 </div>
                 <div className='px-3 py-2 '>
-                    <button className='rounded-md bg-red-600 text-white font-serif p-3 hover:bg-red-700'>Add Request +</button>
+                    <button className='rounded-md bg-red-600 text-white font-serif p-3 hover:bg-red-700' onClick={handlerequest}>Add Request +</button>
           
                 </div>
                 <div className='py-2 px-4'>
