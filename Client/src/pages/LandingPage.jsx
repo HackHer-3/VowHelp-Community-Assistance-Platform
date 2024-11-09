@@ -29,7 +29,7 @@ const LandingPage = () => {
           </Link>
         </div>
         <div className="absolute inset-0 bg-red-100 opacity-65 rounded-lg">
-          <img src={BG} alt="" className='w-full h-full object-cover'/>
+          <img src={BG} alt="" className='w-full h-full object-cover' />
         </div>
       </section>
     
