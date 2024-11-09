@@ -3,7 +3,6 @@ import Home_nav from '../components/Home_nav';
 import Emergency_req from '../components/Emergency_req';
 import Posts from '../components/Posts';
 import Filters from '../components/Filters';
-import ContactPopup from '../components/ContactPopup';
 
 const Home = () => {
   
@@ -17,7 +16,7 @@ const Home = () => {
             <Filters />
           </div>
           <div className='flex-grow w-2/4 mx-auto top-30 overflow-y-auto'>
-            <Posts onRespond={openContactPopup} />
+            <Posts />
           </div>
           <div className='flex-none w-1/4'>
             <Emergency_req />
