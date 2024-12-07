@@ -12,6 +12,9 @@ const LandingPage = () => {
           <Link to="/about" className="hover:text-red-300 font-bold">
             About
           </Link>
+          <Link to="/admindashboard" className="hover:text-red-300 font-bold">
+            Admin Dashboard
+          </Link>
           <a href="#features" className="hover:text-red-300 font-bold">
             Features
           </a>
