@@ -27,9 +27,9 @@ public class HelpRequestService {
     }
 
     // Method to get only emergency requests
+
     public List<HelpRequest> getEmergencyRequests() {
-        return helpRequestRepository.findAll().stream()
-                .filter(request -> "emergency".equalsIgnoreCase(request.getUrgencyLevel()))
-                .collect(Collectors.toList());
+        return helpRequestRepository.findByUrgencyLevel("high");
     }
+
 }

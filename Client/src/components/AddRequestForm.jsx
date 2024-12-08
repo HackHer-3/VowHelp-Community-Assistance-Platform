@@ -1,29 +1,50 @@
-// AddRequestForm.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import axiosInstance from '../services/api';
 
-const AddRequestForm = ({ onClose }) => {
-  const [description, setDescription] = useState('');
-  const [location, setLocation] = useState('');
-  const [date, setDate] = useState('');
-  const [urgencyLevel, setUrgencyLevel] = useState('low');
+const AddRequestForm = () => {
+  const [formData, setFormData] = useState({
+    description: '',
+    location: '',
+    date: '',
+    urgencyLevel: 'low',
+  });
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate(); // Initialize the navigate function
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic
-    onClose(); // Close the form on submit
+    try {
+      await axiosInstance.post('/api/requests', formData);
+      alert('Request added successfully!');
+      navigate('/home'); // Redirect to home page
+    } catch (error) {
+      console.error('Error adding request:', error);
+      alert('Failed to add request. Please try again.');
+    }
+  };
+
+  const handleCancel = () => {
+    navigate('/home'); // Redirect to home page
   };
 
   return (
-    <div className='w-screen h-screen bg-slate-200 fixed flex items-center justify-center'>
-      <div className="bg-white shadow-2xl p-6 rounded-lg w-full sm:w-[80vw] md:w-[60vw] lg:w-[40vw] xl:w-[30vw]">
-        <h2 className="text-xl text-red-600 font-bold mb-4">Add New Request</h2>
+    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white shadow-2xl p-6 rounded-lg w-full max-w-md">
+        <h2 className="text-xl font-bold text-red-600 mb-4">Add New Request</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700">Description</label>
             <textarea
-              className="w-full p-3 border border-red-300 rounded"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              name="description"
+              className="w-full p-3 border border-gray-300 rounded"
+              value={formData.description}
+              onChange={handleChange}
               required
             ></textarea>
           </div>
@@ -31,9 +52,10 @@ const AddRequestForm = ({ onClose }) => {
             <label className="block text-gray-700">Location</label>
             <input
               type="text"
-              className="w-full p-3 border border-red-300 rounded"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
+              name="location"
+              className="w-full p-3 border border-gray-300 rounded"
+              value={formData.location}
+              onChange={handleChange}
               required
             />
           </div>
@@ -41,18 +63,20 @@ const AddRequestForm = ({ onClose }) => {
             <label className="block text-gray-700">Date</label>
             <input
               type="date"
-              className="w-full p-3 border border-red-300 rounded"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
+              name="date"
+              className="w-full p-3 border border-gray-300 rounded"
+              value={formData.date}
+              onChange={handleChange}
               required
             />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Urgency Level</label>
             <select
-              className="w-full p-3 border border-red-300 rounded"
-              value={urgencyLevel}
-              onChange={(e) => setUrgencyLevel(e.target.value)}
+              name="urgencyLevel"
+              className="w-full p-3 border border-gray-300 rounded"
+              value={formData.urgencyLevel}
+              onChange={handleChange}
             >
               <option value="low">Low</option>
               <option value="medium">Medium</option>
@@ -60,57 +84,22 @@ const AddRequestForm = ({ onClose }) => {
             </select>
           </div>
           <div className="flex justify-end">
-            <button type="button" onClick={onClose} className="mr-2 bg-gray-200 p-2 rounded">
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="mr-2 bg-gray-300 hover:bg-gray-400 text-black py-2 px-4 rounded"
+            >
               Cancel
             </button>
-            <button type="submit" className="bg-red-600 text-white p-2 rounded">
+            <button
+              type="submit"
+              className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded"
+            >
               Add Request
             </button>
           </div>
         </form>
       </div>
-
-      <style jsx>{`
-        @media (max-width: 640px) {
-          .bg-white {
-            width: 90vw;
-            padding: 1rem;
-          }
-          h2 {
-            font-size: 1.25rem;
-          }
-        }
-
-        @media (min-width: 641px) and (max-width: 768px) {
-          .bg-white {
-            width: 75vw;
-            padding: 1.5rem;
-          }
-          h2 {
-            font-size: 1.5rem;
-          }
-        }
-
-        @media (min-width: 769px) and (max-width: 1024px) {
-          .bg-white {
-            width: 50vw;
-            padding: 2rem;
-          }
-          h2 {
-            font-size: 1.75rem;
-          }
-        }
-
-        @media (min-width: 1025px) {
-          .bg-white {
-            width: 30vw;
-            padding: 2.5rem;
-          }
-          h2 {
-            font-size: 2rem;
-          }
-        }
-      `}</style>
     </div>
   );
 };
