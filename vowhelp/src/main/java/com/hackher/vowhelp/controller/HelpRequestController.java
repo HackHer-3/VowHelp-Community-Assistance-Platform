@@ -35,4 +35,6 @@ public class HelpRequestController {
             return new ResponseEntity<>("Error creating request: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+
 }

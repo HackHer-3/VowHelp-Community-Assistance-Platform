@@ -1,4 +1,4 @@
-
+// SignInSignUp.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import backgroundImg from '../assets/img/Signin.jpg'; 
@@ -8,6 +8,9 @@ import instagramLogo from '../assets/img/ig.png';
 
 const SignInSignUp = () => {
   const [isSignUp, setIsSignUp] = useState(false);
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleToggle = () => {
@@ -16,16 +19,31 @@ const SignInSignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+
+    if (isSignUp) {
+      // Sign up logic
+      const newUser = { username, email, password };
+      users.push(newUser);
+      localStorage.setItem('users', JSON.stringify(users));
+      localStorage.setItem('currentUser', JSON.stringify(newUser));
+    } else {
+      // Sign in logic
+      const existingUser = users.find(
+        (user) => user.email === email && user.password === password
+      );
+      if (existingUser) {
+        localStorage.setItem('currentUser', JSON.stringify(existingUser));
+      } else {
+        alert('Invalid credentials');
+        return;
+      }
+    }
     navigate('/Home');
   };
 
   const handleBack = () => {
     navigate('/');
-  };
-
-  const handleSocialSignIn = (platform) => {
-
-    console.log(`Sign in with ${platform}`);
   };
 
   return (
@@ -60,6 +78,8 @@ const SignInSignUp = () => {
                 <input
                   type="text"
                   required
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
               </div>
@@ -71,6 +91,8 @@ const SignInSignUp = () => {
               <input
                 type="email"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
@@ -81,6 +103,8 @@ const SignInSignUp = () => {
               <input
                 type="password"
                 required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
@@ -92,30 +116,6 @@ const SignInSignUp = () => {
             </button>
           </form>
 
-          <div className="mt-6 flex flex-col space-y-4">
-            <h3 className="text-center text-lg text-gray-600">Or sign in with:</h3>
-            <div className="flex justify-center space-x-4">
-              <img
-                src={googleLogo}
-                alt="Sign in with Google"
-                onClick={() => handleSocialSignIn('Google')}
-                className="w-10 h-10 cursor-pointer hover:opacity-75 transition duration-200"
-              />
-              <img
-                src={facebookLogo}
-                alt="Sign in with Facebook"
-                onClick={() => handleSocialSignIn('Facebook')}
-                className="w-10 h-10 cursor-pointer hover:opacity-75 transition duration-200"
-              />
-              <img
-                src={instagramLogo}
-                alt="Sign in with Instagram"
-                onClick={() => handleSocialSignIn('Instagram')}
-                className="w-10 h-10 cursor-pointer hover:opacity-75 transition duration-200"
-              />
-            </div>
-          </div>
-          
           <p className="mt-4 text-center text-gray-600">
             {isSignUp ? 'Already have an account?' : 'Need an account?'}
             <button

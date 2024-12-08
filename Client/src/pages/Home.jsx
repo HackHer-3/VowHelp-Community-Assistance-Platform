@@ -5,24 +5,23 @@ import Posts from '../components/Posts';
 import Filters from '../components/Filters';
 
 const Home = () => {
-  
+  const [filters, setFilters] = useState({});
 
   return (
     <>
-      <div className='bg-slate-100'>
+      <div className="bg-white h-screen flex flex-col">
         <Home_nav />
-        <div className='flex'>
-          <div className='flex-none w-1/4'>
-            <Filters />
+        <div className="flex h-full mt-6">
+          <div className="flex-none w-full sm:w-1/4 px-4">
+            <Filters onFilterApply={setFilters} />
           </div>
-          <div className='flex-grow w-2/4 mx-auto top-30 overflow-y-auto'>
-            <Posts />
+          <div className="flex-grow w-full sm:w-2/4 mx-auto overflow-y-auto px-4">
+            <Posts filters={filters} />
           </div>
-          <div className='flex-none w-1/4'>
+          <div className="flex-none w-full sm:w-1/4 px-4">
             <Emergency_req />
           </div>
         </div>
-        
       </div>
     </>
   );

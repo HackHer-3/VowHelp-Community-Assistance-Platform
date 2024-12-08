@@ -1,27 +1,88 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import icon from '../assets/img/logo.png';
 import profileimg from '../assets/img/download.jpg';
-import { useNavigate } from 'react-router-dom';
 
 const Home_nav = () => {
+    const navigate = useNavigate();
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredContent, setFilteredContent] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const navigate=useNavigate();
-    const handlerequest=()=>{
-     navigate('/addrequest')
-    }
- 
+    // Fetch filtered content from the backend
+    const fetchContent = async (query) => {
+        setIsLoading(true);
+        try {
+            const response = await axios.get('/api/requests', {
+                params: { search: query },
+            });
+            setFilteredContent(response.data); // Assuming the backend returns a list of items
+        } catch (error) {
+            console.error('Error fetching search results:', error);
+            setFilteredContent([]); // Clear results if there's an error
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    // Handle search input change
+    const handleSearch = (e) => {
+        const query = e.target.value;
+        setSearchQuery(query);
+
+        if (query.trim() === '') {
+            setFilteredContent([]); // Clear results for an empty search
+            return;
+        }
+
+        fetchContent(query); // Fetch results from the backend
+    };
+
+    const handleRequest = () => {
+        navigate('/addrequest');
+    };
+
+    const handleProfileClick = () => {
+        navigate('/userprofile');
+    };
+
+    const handleNavigation = (path) => {
+        navigate(path);
+    };
+
     return (
         <>
-            <div className='flex flex-row w-ful h-16 bg-white shadow-md'>
-                
-                    <img src={icon} alt="icon" className='h-[70px]  border-red-600' />
-              
-                <h1 className='text-red-600 text-xl mt-5 font-bold'>VowHelp</h1>
-                <div className='flex flex-grow justify-center pt-2'>
-                    {/* <input type="Search" placeholder='Search by issue' className='p-5 flex items-center  border-b-2 border-red-400 rounded-sm bg-slate-100 h-12 w-200 focus:outline-none' />
-                    <button type="submit" className='border-none'><Search/></button> */}
-                    <form class="form relative">
-                        <button class="absolute left-2 -translate-y-1/2 top-[45%] p-1">
+            <div className="flex flex-row w-full h-16 bg-white shadow-md items-center">
+                {/* Logo and Brand */}
+                <div
+                    className="flex items-center px-4 cursor-pointer"
+                    onClick={() => handleNavigation('/home')}
+                >
+                    <img src={icon} alt="icon" className="h-[50px]" />
+                    <h1 className="text-red-600 text-xl font-bold ml-2">VowHelp</h1>
+                </div>
+
+                {/* Navigation Links */}
+                <div className="flex flex-grow items-center justify-center space-x-8">
+                    <button
+                        className="text-gray-700 hover:text-red-600 font-medium"
+                        onClick={() => handleNavigation('/home')}
+                    >
+                        Home
+                    </button>
+                    <button
+                        className="text-gray-700 hover:text-red-600 font-medium"
+                        onClick={() => handleNavigation('/about')}
+                    >
+                        About
+                    </button>
+                </div>
+
+                {/* Search Bar */}
+                <div className="flex justify-center pt-2">
+                    <form className="form relative">
+                        <button className="absolute left-2 -translate-y-1/2 top-[45%] p-1">
                             <svg
                                 width="17"
                                 height="16"
@@ -29,52 +90,71 @@ const Home_nav = () => {
                                 xmlns="http://www.w3.org/2000/svg"
                                 role="img"
                                 aria-labelledby="search"
-                                class="w-5 h-5 text-gray-700"
+                                className="w-5 h-5 text-gray-700"
                             >
                                 <path
                                     d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
                                     stroke="currentColor"
-                                    stroke-width="1.333"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
+                                    strokeWidth="1.333"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
                                 ></path>
                             </svg>
                         </button>
                         <input
-                            class="input rounded-full px-8 py-2 border-2 w-[20vw] border-red-500 focus:outline-none placeholder-gray-400 transition-all duration-300 shadow-md"
+                            value={searchQuery}
+                            onChange={handleSearch}
+                            className="input rounded-lg px-8 py-2 border-2 w-[30vw] border-red-500 focus:outline-none placeholder-gray-400 transition-all duration-300 shadow-md"
                             placeholder="Search..."
-                            required=""
                             type="text"
                         />
-                        <button type="reset" class="absolute right-4 -translate-y-1/2 top-[40%] p-1">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="w-5 h-5 text-gray-700"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M6 18L18 6M6 6l12 12"
-                                ></path>
-                            </svg>
-                        </button>
                     </form>
-
-
                 </div>
-                <div className='px-3 py-2 '>
-                    <button className='rounded-md bg-red-600 text-white font-serif p-3 hover:bg-red-700' onClick={handlerequest}>Add Request +</button>
-          
+
+                {/* Add Request Button */}
+                <div className="px-3 py-2">
+                    <button
+                        className="rounded-md bg-red-600 text-white font-bold px-4 py-2 hover:bg-red-700"
+                        onClick={handleRequest}
+                    >
+                        Add Request +
+                    </button>
                 </div>
-                <div className='py-2 px-4'>
-                    <img src={profileimg} alt="User Profile" className='border-red-400 border-2 rounded-full w-12 h-12' />
+
+                {/* User Profile */}
+                <div className="py-2 px-4">
+                    <img
+                        src={profileimg}
+                        alt="User Profile"
+                        className="border-red-400 border-2 rounded-full w-12 h-12 cursor-pointer"
+                        onClick={handleProfileClick}
+                    />
                 </div>
             </div>
-        </>
-    )
-}
 
-export default Home_nav
+            {/* Search Results */}
+            {searchQuery && (
+                <div className="mt-4 px-6">
+                    <h2 className="text-lg font-bold text-gray-800 mb-3">Search Results:</h2>
+                    {isLoading ? (
+                        <p className="text-gray-500">Loading...</p>
+                    ) : (
+                        <ul className="space-y-2">
+                            {filteredContent.length > 0 ? (
+                                filteredContent.map((item, index) => (
+                                    <li key={index} className="bg-gray-100 rounded p-2 shadow">
+                                        {item.title || 'No Title'} - {item.description || 'No Description'}
+                                    </li>
+                                ))
+                            ) : (
+                                <p className="text-gray-500">No results found</p>
+                            )}
+                        </ul>
+                    )}
+                </div>
+            )}
+        </>
+    );
+};
+
+export default Home_nav;
